@@ -17,7 +17,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.post("/generate")
+@app.post('/')
 async def generate_text(prompt: str):
     with open('prompt_script.txt', 'r') as infile:
         prompt = infile.read().replace('<<ED>>', prompt)
