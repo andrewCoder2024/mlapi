@@ -10,14 +10,10 @@ import os
 #with open('openaiapikey.txt', 'r') as infile:
 #       openai.api_key = infile.read()
 #openai.api_key = os.environ['openai_key']
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-@app.post('/')
+@app.get('/')
+def index():
+    return {"name" : "First Data"}
+@app.post('/generate')
 async def generate_text(prompt: str):
     with open('prompt_script.txt', 'r') as infile:
         prompt = infile.read().replace('<<ED>>', prompt)
@@ -27,10 +23,6 @@ async def generate_text(prompt: str):
   "prompt": prompt,
   "max_tokens": 256,
   "temperature": 0.7}, headers=headers)
-    #response = openai.Completion.create(
-    #    engine="text-davinci-003",
-   #     prompt=prompt
-    #)
     completion = r["choices"][0]["text"]
     lines = completion.split("\n")
     lines = [line for line in lines if line]
