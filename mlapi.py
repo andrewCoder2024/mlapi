@@ -10,10 +10,11 @@ import os
 #with open('openaiapikey.txt', 'r') as infile:
 #       openai.api_key = infile.read()
 #openai.api_key = os.environ['openai_key']
-@app.get('/')
-def index():
-    return {"name" : "First Data"}
-@app.post('/generate')
+@app.get("/")
+def hello():
+    return {"message":"Hello TutLinks.com"}
+'''
+@app.post("/generate")
 async def generate_text(prompt: str):
     with open('prompt_script.txt', 'r') as infile:
         prompt = infile.read().replace('<<ED>>', prompt)
@@ -36,3 +37,4 @@ async def generate_text(prompt: str):
         data[key] = value
     json_data = json.dumps(data)
     return json_data
+'''
